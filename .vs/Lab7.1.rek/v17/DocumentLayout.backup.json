@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\User\\source\\repos\\Lab7.1.rek\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6F88A029-93FC-4515-8BAC-B40E5E201DA3}|UnitTest1\\UnitTest1.vcxproj|C:\\Users\\User\\source\\repos\\Lab7.1.rek\\UnitTest1\\UnitTest1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{6F88A029-93FC-4515-8BAC-B40E5E201DA3}|UnitTest1\\UnitTest1.vcxproj|solutionrelative:UnitTest1\\UnitTest1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DF8B0B76-1072-4242-ADC4-232F035B4020}|Lab7.1.rek\\Lab7.1.rek.vcxproj|C:\\Users\\User\\source\\repos\\Lab7.1.rek\\Lab7.1.rek\\Source.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{DF8B0B76-1072-4242-ADC4-232F035B4020}|Lab7.1.rek\\Lab7.1.rek.vcxproj|solutionrelative:Lab7.1.rek\\Source.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F88A029-93FC-4515-8BAC-B40E5E201DA3}|UnitTest1\\UnitTest1.vcxproj|C:\\Users\\User\\source\\repos\\Lab7.1.rek\\UnitTest1\\UnitTest1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{6F88A029-93FC-4515-8BAC-B40E5E201DA3}|UnitTest1\\UnitTest1.vcxproj|solutionrelative:UnitTest1\\UnitTest1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,11 +18,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "UnitTest1.cpp",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\Lab7.1.rek\\UnitTest1\\UnitTest1.cpp",
               "RelativeDocumentMoniker": "UnitTest1\\UnitTest1.cpp",
@@ -35,13 +35,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Source.cpp",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\Lab7.1.rek\\Lab7.1.rek\\Source.cpp",
               "RelativeDocumentMoniker": "Lab7.1.rek\\Source.cpp",
               "ToolTip": "C:\\Users\\User\\source\\repos\\Lab7.1.rek\\Lab7.1.rek\\Source.cpp",
               "RelativeToolTip": "Lab7.1.rek\\Source.cpp",
-              "ViewState": "AgIAAG0AAAAAAAAAAAAUwHYAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-19T15:53:10.657Z",
               "EditorCaption": ""

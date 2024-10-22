@@ -3,11 +3,11 @@
 #include <time.h>
 using namespace std;
 
-void Create(int** a, const int rowCount, const int colCount, const int Low, const int High);
-void Print(int** a, const int rowCount, const int colCount);
-void Sort(int** a, const int rowCount, const int colCount);
-void Change(int** a, const int row1, const int row2, const int colCount);
-void Calc(int** a, const int rowCount, const int colCount, int& S, int& k);
+void Create(int** a, const int rowCount, const int colCount, const int Low, const int High, int i = 0, int j = 0);
+void Print(int** a, const int rowCount, const int colCount, int i = 0, int j = 0);
+void Sort(int** a, const int rowCount, const int colCount, int i = 0, bool swapped = false);
+void Change(int** a, const int row1, const int row2, const int colCount, int j = 0);
+void Calc(int** a, const int rowCount, const int colCount, int& S, int& k, int i = 0, int j = 0);
 
 int main()
 {
@@ -20,19 +20,19 @@ int main()
     for (int i = 0; i < rowCount; i++)
         a[i] = new int[colCount];
 
-    Create(a, rowCount, colCount, Low, High);  
-    Print(a, rowCount, colCount); 
-    cout << endl;
-    Sort(a, rowCount, colCount);  
-    Print(a, rowCount, colCount);  
+    Create(a, rowCount, colCount, Low, High);
+    Print(a, rowCount, colCount);
+
+    Sort(a, rowCount, colCount);
+    Print(a, rowCount, colCount);
 
     int S = 0, k = 0;
-    Calc(a, rowCount, colCount, S, k); 
+    Calc(a, rowCount, colCount, S, k);
 
     cout << "S = " << S << endl;
     cout << "k = " << k << endl;
 
-    Print(a, rowCount, colCount);  
+    Print(a, rowCount, colCount);
 
     for (int i = 0; i < rowCount; i++)
         delete[] a[i];
@@ -41,93 +41,86 @@ int main()
     return 0;
 }
 
-void Create(int** a, const int rowCount, const int colCount, const int Low, const int High, int i = 0, int j = 0)
+void Create(int** a, const int rowCount, const int colCount, const int Low, const int High, int i, int j)
 {
-    if (i >= rowCount) return;
-
-    a[i][j] = Low + rand() % (High - Low + 1);
-
-    if (j + 1 < colCount)
-        Create(a, rowCount, colCount, Low, High, i, j + 1);
-    else
-        Create(a, rowCount, colCount, Low, High, i + 1, 0);
-}
-
-void Create(int** a, const int rowCount, const int colCount, const int Low, const int High)
-{
-    Create(a, rowCount, colCount, Low, High, 0, 0);
-}
-
-void Print(int** a, const int rowCount, const int colCount, int i = 0, int j = 0)
-{
-    if (i >= rowCount) return;
-
-    cout << setw(4) << a[i][j];
-
-    if (j + 1 < colCount)
-        Print(a, rowCount, colCount, i, j + 1);
-    else
-    {
-        cout << endl;
-        Print(a, rowCount, colCount, i + 1, 0);
+    if (i < rowCount) {
+        if (j < colCount) {
+            a[i][j] = Low + rand() % (High - Low + 1);
+            Create(a, rowCount, colCount, Low, High, i, j + 1);  
+        }
+        else {
+            Create(a, rowCount, colCount, Low, High, i + 1, 0);  
+        }
     }
 }
 
-void Print(int** a, const int rowCount, const int colCount)
+void Print(int** a, const int rowCount, const int colCount, int i, int j)
 {
-    Print(a, rowCount, colCount, 0, 0);
+    if (i < rowCount) {
+        if (j < colCount) {
+            cout << setw(4) << a[i][j];
+            Print(a, rowCount, colCount, i, j + 1);  
+        }
+        else {
+            cout << endl;
+            Print(a, rowCount, colCount, i + 1, 0);  
+        }
+    }
+    else {
+        cout << endl;
+    }
 }
 
-void Change(int** a, const int row1, const int row2, const int colCount)
+void Sort(int** a, const int rowCount, const int colCount, int i, bool swapped)
 {
-    for (int j = 0; j < colCount; j++)
-    {
+    if (i < rowCount - 1) {
+        if (!swapped && i == 0) {
+            swapped = false;  
+        }
+
+        if (a[i][0] < a[i + 1][0]) {
+            Change(a, i, i + 1, colCount);
+            swapped = true;
+        }
+        else if (a[i][0] == a[i + 1][0] && a[i][1] < a[i + 1][1]) {
+            Change(a, i, i + 1, colCount);
+            swapped = true;
+        }
+        else if (a[i][0] == a[i + 1][0] && a[i][1] == a[i + 1][1] && a[i][2] > a[i + 1][2]) {
+            Change(a, i, i + 1, colCount);
+            swapped = true;
+        }
+
+        Sort(a, rowCount, colCount, i + 1, swapped); 
+    }
+    else if (swapped) {
+        Sort(a, rowCount, colCount, 0, false);  
+    }
+}
+
+void Change(int** a, const int row1, const int row2, const int colCount, int j)
+{
+    if (j < colCount) {
         int tmp = a[row1][j];
         a[row1][j] = a[row2][j];
         a[row2][j] = tmp;
+        Change(a, row1, row2, colCount, j + 1); 
     }
 }
 
-void Sort(int** a, const int rowCount, const int colCount, int i = 0)
+void Calc(int** a, const int rowCount, const int colCount, int& S, int& k, int i, int j)
 {
-    if (i >= rowCount - 1) return;  
-
-    for (int j = 0; j < rowCount - i - 1; j++)  
-    {
-        if (a[j][0] < a[j + 1][0])  
-            Change(a, j, j + 1, colCount);
-        else if (a[j][0] == a[j + 1][0] && a[j][1] < a[j + 1][1])  
-            Change(a, j, j + 1, colCount);
-        else if (a[j][0] == a[j + 1][0] && a[j][1] == a[j + 1][1] && a[j][2] > a[j + 1][2]) 
-            Change(a, j, j + 1, colCount);
+    if (i < rowCount) {
+        if (j < colCount) {
+            if (a[i][j] > 0 && (a[i][j] % 2 != 0)) {
+                S += a[i][j];
+                k++;
+                a[i][j] = 0;  
+            }
+            Calc(a, rowCount, colCount, S, k, i, j + 1);  
+        }
+        else {
+            Calc(a, rowCount, colCount, S, k, i + 1, 0);  
+        }
     }
-
-    Sort(a, rowCount, colCount, i + 1);  
-}
-
-void Sort(int** a, const int rowCount, const int colCount)
-{
-    Sort(a, rowCount, colCount, 0);
-}
-
-void Calc(int** a, const int rowCount, const int colCount, int& S, int& k, int i = 0, int j = 0)
-{
-    if (i >= rowCount) return;
-
-    if (a[i][j] > 0 && (a[i][j] % 2 != 0))  
-    {
-        S += a[i][j];
-        k++;
-        a[i][j] = 0;  
-    }
-
-    if (j + 1 < colCount)
-        Calc(a, rowCount, colCount, S, k, i, j + 1);
-    else
-        Calc(a, rowCount, colCount, S, k, i + 1, 0);
-}
-
-void Calc(int** a, const int rowCount, const int colCount, int& S, int& k)
-{
-    Calc(a, rowCount, colCount, S, k, 0, 0);
 }
